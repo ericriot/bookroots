@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130917034433) do
+ActiveRecord::Schema.define(version: 20130917153552) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20130917034433) do
     t.integer  "published"
     t.text     "synopsis"
     t.string   "image"
-    t.string   "amazonUrl"
+    t.string   "amazon_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "author_id"

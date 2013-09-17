@@ -1,6 +1,40 @@
 <%- title "Reading #{@book.title}" %>
 
 <h1><%= @book.title %></h1>
+<p>Written by: <%= @book.author.name %>, <%= @book.published %></p>
 
-<p>Written by: <%= @book.author %></p>
+<div class="control_group">
+	<div class="span3">
+		<% if @book.image %>
+			<%= image_tag "books/" + @book.image, class: 'img-rounded book-image' %>
+		<% else %>
+			Image coming soon.
+		<% end %>
+	</div>
+	<div class="span7">
+		
+		<p>Lots of text here. Short snyopsis. </p>
+
+
+		<% if @book.amazon_url %>
+			<a href="<%= @book.amazon_url %>" target="_blank">
+				<%= image_tag "amazon.png" %>	
+				Purchase on Amazon.com
+			</a>
+		<% end %>
+
+		<h2>Roots</h2>
+		<p>List of books that the current book mentions.</p>
+
+
+	</div>
+	<br class="clear" />
+
+</div>
+<br class="clear" />
+
+<div class="control_group">
+	<%= link_to 'Edit', edit_book_path(@book) %>
+</div>
+
 
