@@ -1,11 +1,18 @@
 Bookroots::Application.routes.draw do
   devise_for :users
+  
+  # i let the scaffold command do this just to learn. will be removed.
   resources :examples
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :books, :authors
+  # boks is a main resource but references will be nested under it.
+  resources :books do
+    resources :references
+  end
+
+  resources :authors
 
   root 'books#index'
   

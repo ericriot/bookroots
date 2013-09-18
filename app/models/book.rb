@@ -15,7 +15,7 @@ class Book < ActiveRecord::Base
 	validates :author, presence:true
 	belongs_to :author
 	
-
+	belongs_to :user # user that added book to database
 	
 
 

@@ -1,4 +1,4 @@
-<%- title "Reading #{@book.title}" %>
+<%- title "#{@book.title}" %>
 
 <h1><%= @book.title %></h1>
 <p>Written by: <%= @book.author.name %>, <%= @book.published %></p>
@@ -24,17 +24,25 @@
 		<% end %>
 
 		<h2>Roots</h2>
-		<p>List of books that the current book references.</p>
 
-		<ul>
-		<% @book.references.each do |reference| %>
-			<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
-				<br />by <%=reference.referenced_book.author.name %>
-				<br />
-				<%= reference.description %>
-			</li>
+		<p>List of books that the current book references. 
+		<%= link_to "Add Reference", new_book_reference_path(@book) %>
+		</p>
+
+
+		<% if @book.references.count > 0 %>
+			<ul>
+			<% @book.references.each do |reference| %>
+				<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
+					<br />by <%=reference.referenced_book.author.name %>
+					<br />
+					<%= reference.description %>
+				</li>
+			<% end %>
+			</ul>
+		<% else %>
+			<p>There are no references for this book! Please consider adding one if you have read it.
 		<% end %>
-		</ul>
 
 	</div>
 	<br class="clear" />
