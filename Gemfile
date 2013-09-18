@@ -17,6 +17,12 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'bootstrap-sass'
 
+# devise authentication
+gem "devise", "~> 3.1.0"
+
+# friendly urls not working?
+# gem 'friendly_id', '~> 4.0.10.1'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

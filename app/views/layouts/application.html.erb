@@ -11,12 +11,34 @@
 	<header class="navbar navbar-fixed-top">
     <nav class="navbar-inner">
       <div class="container">
-      	<a href="/">BookRoots</a>  
+      	<ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="/">BookRoots</a></li>
+          <li><%= link_to "Add a Book", new_book_path %></li>
+        </ul>
+        <div style="float:right; display:inline;">
+          <ul class="nav navbar-nav">
+            <% if current_user %>
+              <li><a>My Account</a></li>
+              <li><%= link_to "Log Out", destroy_user_session_path , :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Log In", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
   <main role="main">
       <div class="container">
+
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
         <%= yield %>
       </div>
     </div>

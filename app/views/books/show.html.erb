@@ -5,7 +5,7 @@
 
 <div class="control_group">
 	<div class="span3">
-		<% if @book.image %>
+		<% if @book.image != "" %>
 			<%= image_tag "books/" + @book.image, class: 'img-rounded book-image' %>
 		<% else %>
 			Image coming soon.
@@ -24,8 +24,17 @@
 		<% end %>
 
 		<h2>Roots</h2>
-		<p>List of books that the current book mentions.</p>
+		<p>List of books that the current book references.</p>
 
+		<ul>
+		<% @book.references.each do |reference| %>
+			<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
+				<br />by <%=reference.referenced_book.author.name %>
+				<br />
+				<%= reference.description %>
+			</li>
+		<% end %>
+		</ul>
 
 	</div>
 	<br class="clear" />
