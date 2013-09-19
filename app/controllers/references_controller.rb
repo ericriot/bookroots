@@ -1,11 +1,13 @@
 class ReferencesController < ApplicationController
+	load_and_authorize_resource
 
 	def new
 	  @book = Book.find(params[:book_id]) 
 	  @reference = Reference.new(:book_id => params[:book_id])
 
 	  # poulate the drop down. not scalable 
-	  @books = Book.all()
+	  @books = Book.where(' id <> ' + @book.id.to_s ).order(' title ASC ')
+
 
 	end
 

@@ -13,7 +13,9 @@
       <div class="container">
       	<ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="/">BookRoots</a></li>
-          <li><%= link_to "Add a Book", new_book_path %></li>
+          <% if can? :add, @book %>
+            <li><%= link_to "Add a Book", new_book_path %></li>
+          <% end %>
         </ul>
         <div style="float:right; display:inline;">
           <ul class="nav navbar-nav">

@@ -1,27 +1,54 @@
 
 <h1>Listing Books</h1>
 <table class="table table-condensed">
-  <theadh>
+  <thead>
     <tr>
       <th>Title</th>
       <th>Author</th>
       <th>Published</th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
- 
   <% @books.each do |book| %>
     <tr>
       <td><%= link_to book.title, book %></td>
       <td><%= book.author.name %></td>
       <td><%= book.published %></td>
-      <td><%= link_to 'Edit', edit_book_path(book) %></td>
-      <td><%= link_to 'Destroy', book,
-                      method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><% if can? :update, book %>
+        <%= link_to 'Edit', edit_book_path(book) %> &nbsp;
+        <% end %>
+        <% if can? :destroy, book %>
+        <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
-
   </tbody>
 </table>
+
+<% if false %>
+<!-- NO time for this -->
+<h2>Grid View</h2>
+<div class="row">
+  <% i = 1 %>
+  <% @books.each do |book| %>
+
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <%= image_tag "books/" + book.image, class: 'img-responsive ' %>
+        
+          <%= i %> - <%= book.title %>
+        
+      </div>
+    </div>
+    <%
+    i += 1
+    if i % 3 == 1
+      %></div><div class="row"><%
+
+    end
+    %>
+  <% end %>
+</div>
+<% end %>

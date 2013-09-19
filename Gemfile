@@ -20,6 +20,9 @@ gem 'bootstrap-sass'
 # devise authentication
 gem "devise", "~> 3.1.0"
 
+# cancan authorization
+gem "cancan"
+
 # friendly urls not working?
 # gem 'friendly_id', '~> 4.0.10.1'
 

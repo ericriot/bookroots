@@ -1,4 +1,4 @@
-<%- title "#{@book.title}" %>
+<%- title "Books referenced in #{@book.title}" %>
 
 <h1><%= @book.title %></h1>
 <p>Written by: <%= @book.author.name %>, <%= @book.published %></p>
@@ -11,12 +11,13 @@
 			Image coming soon.
 		<% end %>
 	</div>
-	<div class="span7">
+	<div class="span8">
 		
 		<p>Lots of text here. Short snyopsis. </p>
 
 
-		<% if @book.amazon_url %>
+		<% if @book.amazon_url && false %>
+			<!-- no affiliate program in CT! -->
 			<a href="<%= @book.amazon_url %>" target="_blank">
 				<%= image_tag "amazon.png" %>	
 				Purchase on Amazon.com
@@ -36,7 +37,8 @@
 				<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
 					<br />by <%=reference.referenced_book.author.name %>
 					<br />
-					<%= reference.description %>
+					<p><%= reference.description %></p>
+					<% # reference.created_at.strftime("%B %d, %Y") %>
 				</li>
 			<% end %>
 			</ul>
@@ -51,7 +53,10 @@
 <br class="clear" />
 
 <div class="control_group">
-	<%= link_to 'Edit', edit_book_path(@book) %>
+	<% if can? :update, @book %>
+		<%= link_to 'Edit', edit_book_path(@book) %>
+	<% end %>
+	
 </div>
 
 
