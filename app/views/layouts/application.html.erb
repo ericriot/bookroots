@@ -12,9 +12,15 @@
     <nav class="navbar-inner">
       <div class="container">
       	<ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="/">BookRoots</a></li>
+          <li><a class="navbar-brand" href="#">Home</a></li>
+          <li><%= link_to "Books", books_path %></li>
+          <li><%= link_to "Authors", authors_path %></li>
+
           <% if can? :add, @book %>
             <li><%= link_to "Add a Book", new_book_path %></li>
+          <% end %>
+          <% if can? :add, @author %>
+            <li><%= link_to "Add an Author", new_author_path %></li>
           <% end %>
         </ul>
         <div style="float:right; display:inline;">

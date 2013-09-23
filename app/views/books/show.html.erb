@@ -1,7 +1,7 @@
 <%- title "Books referenced in #{@book.title}" %>
 
 <h1><%= @book.title %></h1>
-<p>Written by: <%= @book.author.name %>, <%= @book.published %></p>
+<p>Written by: <%= link_to @book.author.name, @book.author %>, <%= @book.published %></p>
 
 <div class="control_group">
 	<div class="span3">
@@ -26,10 +26,7 @@
 
 		<h2>Roots</h2>
 
-		<p>List of books that the current book references. 
-		<%= link_to "Add Reference", new_book_reference_path(@book) %>
-		</p>
-
+		<p>A list of books that <%= @book.title %> references:</p>
 
 		<% if @book.references.count > 0 %>
 			<ul>
@@ -37,14 +34,34 @@
 				<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
 					<br />by <%=reference.referenced_book.author.name %>
 					<br />
-					<p><%= reference.description %></p>
+					<p><%= raw reference.description %></p>
 					<% # reference.created_at.strftime("%B %d, %Y") %>
 				</li>
 			<% end %>
 			</ul>
 		<% else %>
-			<p>There are no references for this book! Please consider adding one if you have read it.
+			<p>There are no references for this book! Please consider <a href="#">Telling us about one</a> if you have read it.</p>
 		<% end %>
+
+		<h2>Branches</h2>
+
+		<p>A list of books that used <%= @book.title %> for inspiration:</p>
+
+		<% if @book.branches.count > 0 %>
+			<ul>
+			<% @book.branches.each do |branch| %>
+				<li><%= link_to branch.branched_book.title, branch.branched_book %></a>
+					<br />by <%=branch.branched_book.author.name %>
+					<br />
+					<p><%= raw branch.description %></p>
+				</li>
+			<% end %>
+			</ul>
+		<% else %>
+			<p>There are no brances for this book. Stay tuned.</p>
+		<% end %>
+
+
 
 	</div>
 	<br class="clear" />
@@ -54,9 +71,13 @@
 
 <div class="control_group">
 	<% if can? :update, @book %>
-		<%= link_to 'Edit', edit_book_path(@book) %>
+		<%= link_to 'Edit', edit_book_path(@book) %> &nbsp;
 	<% end %>
 	
+	<% if can? :create, @reference %>
+		<%= link_to "Add Reference", new_book_reference_path(@book) %>
+	<% end %>
+
 </div>
 
 

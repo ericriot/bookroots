@@ -1,18 +1,21 @@
 class BooksController < ApplicationController
-	before_action :set_book, only: [:show, :edit, :update, :destroy]
-	load_and_authorize_resource
+	load_and_authorize_resource :except => :create
 
+	before_action :set_book, only: [:show, :edit, :update, :destroy]
+	
+	
 	def new
 		@book = Book.new()
 		@authors = Author.all()
 	end
 
 	def index
-		@books = Book.all()
+		Book.all( :include => [ :author, :references, :branches])
+
+
 	end
 
 	def show
-		@book = Book.find(params[:id])
 	end
 
 	def edit
@@ -21,9 +24,7 @@ class BooksController < ApplicationController
   	end
 
 	def destroy
-		@book = Book.find(params[:id])
 		@book.destroy
-
 		redirect_to books_path
 	end
 
@@ -31,6 +32,8 @@ class BooksController < ApplicationController
 	def create
 	  
 	  @book = Book.new(book_params)
+	  authorize! :create, @book 
+
  
 	  @book.save
 	  redirect_to @book

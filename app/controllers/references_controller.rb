@@ -1,5 +1,5 @@
 class ReferencesController < ApplicationController
-	load_and_authorize_resource
+	load_and_authorize_resource :except => :create
 
 	def new
 	  @book = Book.find(params[:book_id]) 
@@ -19,6 +19,10 @@ class ReferencesController < ApplicationController
 	  @reference = Reference.new(reference_params)
  	  @reference.user_id = current_user.id
  	  @reference.book_id = @book.id
+	  	
+	  authorize! :create, @reference 
+
+
 	  @reference.save
 
 	  redirect_to @book

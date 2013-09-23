@@ -1,0 +1,15 @@
+<%- title "#{@author.name}" %>
+
+<h1><%= @author.name %></h1>
+
+<p>Not much to see here, yet. A responsive image grid of books will be here soon.</p>
+
+
+<div class="control_group">
+	<% if can? :update, @author %>
+		<%= link_to 'Edit', edit_author_path(@author) %> &nbsp;
+	<% end %>
+	
+</div>
+
+

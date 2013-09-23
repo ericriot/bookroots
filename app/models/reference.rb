@@ -15,6 +15,11 @@ class Reference < ActiveRecord::Base
 	# this was tough! straightforward but a weird reference to learn with
 	belongs_to :referenced_book, :class_name => "Book", :foreign_key => "book_id_secondary"
 
+	# this is the inverse of above
+	belongs_to :branched_book, :class_name => "Book", :foreign_key => "book_id"
+
+
+
 	# this is the user that created the reference. I'll store it but not sure what i'll do with it
 	belongs_to :user
 

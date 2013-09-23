@@ -1,0 +1,28 @@
+
+<h1>Listing Authors</h1>
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Books</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @author.each do |author| %>
+    <tr>
+      <td><%= link_to author.name, author %></td>
+      <td><%= author.books.count %></td>
+      <td><%= author.created_at %></td>
+      <td><% if can? :update, author %>
+        <%= link_to 'Edit', edit_author_path(author) %> &nbsp;
+        <% end %>
+        <% if can? :destroy, author %>
+        <%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
