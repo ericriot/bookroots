@@ -1,28 +1,13 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+BookRoots serves several purposes:
 
-Things you may want to cover:
+* Store references that books make to oher books, authors, artists, music etc.
 
-* Ruby version
+* Help people find books to read.
 
-* System dependencies
+* Serve as Eric's testing ground to learn new technologies.
 
-* Configuration
+This is not supposed to compete with GoodReads. It aims to compliment it. If I could turn this into a money making venture that'd be great, but that is not the goal.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+eriotte@gmail.com
