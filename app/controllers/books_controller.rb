@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-	load_and_authorize_resource :except => :create
+	# load_and_authorize_resource :except => :create
 
 	before_action :set_book, only: [:show, :edit, :update, :destroy]
 	
@@ -10,12 +10,15 @@ class BooksController < ApplicationController
 	end
 
 	def index
-		Book.all( :include => [ :author, :references, :branches])
-
-
+		if params[:q]
+			@books = Book.where( ' title LIKE :q ' , q: "%#{params[:q]}%" ).all
+		else
+			@books = Book.all( :include => [ :author, :references, :branches])
+		end 
 	end
 
 	def show
+		@book = Book.friendly.find(params[:id])
 	end
 
 	def edit
@@ -34,9 +37,12 @@ class BooksController < ApplicationController
 	  @book = Book.new(book_params)
 	  authorize! :create, @book 
 
- 
-	  @book.save
-	  redirect_to @book
+ 	  if @book.save
+ 	  	redirect_to @book
+ 	  else
+ 	  	@authors = Author.all()
+ 	  	render :controller => 'books', :action => 'new'
+ 	  end
 	end
 
 
@@ -48,7 +54,8 @@ class BooksController < ApplicationController
 				format.html { redirect_to @book, notice: 'Book was successfully updated.' }
 				format.json { head :no_content }
 			else
-				format.html { render action: 'edit' }
+				@authors = Author.all()
+				format.html {  render action: 'edit' }
 				format.json { render json: @book.errors, status: :unprocessable_entity }
 			end
 		end
@@ -60,7 +67,8 @@ class BooksController < ApplicationController
 	private
 	    # Use callbacks to share common setup or constraints between actions.
 	    def set_book
-	      @book = Book.find(params[:id])
+	    	puts "set_book function"
+	      @book = Book.friendly.find(params[:id])
 	    end
 
 	    # Never trust parameters from the scary internet, only allow the white list through.

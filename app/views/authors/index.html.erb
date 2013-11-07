@@ -1,5 +1,11 @@
+<%- title "Authors" %>
 
-<h1>Listing Authors</h1>
+<div class="pull-left">
+  <h1>Listing Authors</h1>
+</div>
+<% if can? :add, @author %>
+   <div class="pull-right"><%= link_to "Add Author", new_author_path, class:'btn btn-primary' %></div>
+<% end %>
 <table class="table table-condensed">
   <thead>
     <tr>
@@ -13,7 +19,7 @@
   <% @author.each do |author| %>
     <tr>
       <td><%= link_to author.name, author %></td>
-      <td><%= author.books.count %></td>
+      <td><%= author.books.size %></td>
       <td><%= author.created_at %></td>
       <td><% if can? :update, author %>
         <%= link_to 'Edit', edit_author_path(author) %> &nbsp;

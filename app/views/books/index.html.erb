@@ -1,5 +1,15 @@
+<% pageTitle = "Browse Books" %>
+<%- title pageTitle %>
 
-<h1>Listing Books</h1>
+<div class="pull-left">
+  <h1><%= pageTitle %></h1>
+</div>
+
+<% if can? :add, @book %>
+  <div class="pull-right"><%= link_to "Add a Book", new_book_path, class: 'btn btn-primary' %></div>
+<% end %>
+
+<% if true # this should be more of an admin view %>
 <table class="table table-condensed">
   <thead>
     <tr>
@@ -17,8 +27,8 @@
       <td><%= link_to book.title, book %></td>
       <td><%= link_to book.author.name, book.author %></td>
       <td><%= book.published %></td>
-      <td><%= book.references.count %></td>
-      <td><%= book.branches.count %></td>
+      <td><%= book.references.size %></td>
+      <td><%= book.branches.size %></td>
       
       <td><% if can? :update, book %>
         <%= link_to 'Edit', edit_book_path(book) %> &nbsp;
@@ -32,28 +42,20 @@
   </tbody>
 </table>
 
+<% end %>
 <% if false %>
-<!-- NO time for this -->
-<h2>Grid View</h2>
-<div class="row">
-  <% i = 1 %>
+<ul id="book_grid">
   <% @books.each do |book| %>
 
-    <div class="col-md-3">
-      <div class="thumbnail">
-        <%= image_tag "books/" + book.image, class: 'img-responsive ' %>
-        
-          <%= i %> - <%= book.title %>
-        
+    <li>
+      <div>
+        <span></span>
+        <%= link_to "##", book  %>
+        <br class="clear" />
       </div>
-    </div>
-    <%
-    i += 1
-    if i % 3 == 1
-      %></div><div class="row"><%
-
-    end
-    %>
+      <%= link_to book.title, book %><br />
+       by <%= link_to book.author.name, book.author %>
+    </li>
   <% end %>
 </div>
 <% end %>

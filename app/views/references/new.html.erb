@@ -1,12 +1,10 @@
-<h1>Add Root to <%= @book.title %></h1>
+<%- title "Add Root to #{{@book.title}}" %>
 
 <p>Please choose which book was referenced during your reading of <%= @book.title %> by <%= @book.author.name %>. A brief description to give this some context is required.</p>
 
 <%= form_for( [@book, @reference], :html => { :role => 'form', :class => 'form'} ) do |f| %>
   <% if @reference.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reference.errors.count, "error") %> prohibited this reference from being saved:</h2>
-
+    <div class="alert">
       <ul>
       <% @reference.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

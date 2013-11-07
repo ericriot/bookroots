@@ -3,18 +3,30 @@
 <h1><%= @book.title %></h1>
 <p>Written by: <%= link_to @book.author.name, @book.author %>, <%= @book.published %></p>
 
-<div class="control_group">
+<div class="row">
 	<div class="span3">
 		<% if @book.image != "" %>
 			<%= image_tag "books/" + @book.image, class: 'img-rounded book-image' %>
 		<% else %>
 			Image coming soon.
 		<% end %>
-	</div>
-	<div class="span8">
 		
-		<p>Lots of text here. Short snyopsis. </p>
+	</div>
+	<div class="span9">
+		
 
+		<% # does the user have the book in their list? # %>
+		
+		<p>
+			<% if current_user.likes_book?(@book.id) %>
+				One of your favorites. Nice choice. 
+			<% else %>
+				<%= link_to ( image_tag("icons/add.png") + " Add to Favorites" ) ,  book_favorites_path(:book_id => @book), :method => :post %>
+			<% end %>
+		
+			<%= link_to raw("<i class='add'></i> Share"), "#", class: 'btn btn-primary' %>
+		</p>
+		
 
 		<% if @book.amazon_url && false %>
 			<!-- no affiliate program in CT! -->
@@ -24,26 +36,35 @@
 			</a>
 		<% end %>
 
-		<h2>Roots</h2>
+		<h2><%= pluralize(@book.references.count, "Root") %></h2>
 
 		<p>A list of books that <%= @book.title %> references:</p>
 
 		<% if @book.references.count > 0 %>
-			<ul>
+			
 			<% @book.references.each do |reference| %>
-				<li><%= link_to reference.referenced_book.title, reference.referenced_book %></a>
-					<br />by <%=reference.referenced_book.author.name %>
-					<br />
-					<p><%= raw reference.description %></p>
-					<% # reference.created_at.strftime("%B %d, %Y") %>
-				</li>
+				<div class="row show-grid" style="margin-bottom:8px; ">
+					<div class="span1">
+							<div class="thumbnail">
+								<%= link_to( image_tag("books/#{reference.referenced_book.image}"), reference.referenced_book ) %>
+							</div>
+					</div>
+					<div class="span8">
+						<%= link_to reference.referenced_book.title, reference.referenced_book %></a>
+						<br />by <%= link_to reference.referenced_book.author.name, reference.referenced_book.author %>
+						<br />
+						<p><%= raw reference.description %></p>
+						<% # reference.created_at.strftime("%B %d, %Y") %>
+					</div>
+					<br class="clear" />
+				</div>
 			<% end %>
-			</ul>
+			
 		<% else %>
 			<p>There are no references for this book! Please consider <a href="#">Telling us about one</a> if you have read it.</p>
 		<% end %>
 
-		<h2>Branches</h2>
+		<h2><%= pluralize(@book.branches.count, "Branch") %></h2>
 
 		<p>A list of books that used <%= @book.title %> for inspiration:</p>
 
@@ -51,9 +72,9 @@
 			<ul>
 			<% @book.branches.each do |branch| %>
 				<li><%= link_to branch.branched_book.title, branch.branched_book %></a>
-					<br />by <%=branch.branched_book.author.name %>
-					<br />
-					<p><%= raw branch.description %></p>
+					<br />by <%=link_to branch.branched_book.author.name, branch.branched_book.author %>
+					<!-- descriptions do not make sense here, they are written based on the the main book -->
+					
 				</li>
 			<% end %>
 			</ul>
@@ -69,11 +90,16 @@
 </div>
 <br class="clear" />
 
-<div class="control_group">
+<div class="control_group" style="border:1px solid #d4d4d4; padding:5px 8px; ">
+
+	<%= image_tag("icons/lock.png", :alt => "Admin Options") %> &nbsp; 
+
 	<% if can? :update, @book %>
 		<%= link_to 'Edit', edit_book_path(@book) %> &nbsp;
 	<% end %>
-	
+	<% if can? :destroy, @book %>
+		<%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %> &nbsp;
+	<% end %>
 	<% if can? :create, @reference %>
 		<%= link_to "Add Reference", new_book_reference_path(@book) %>
 	<% end %>

@@ -2,7 +2,7 @@ class ReferencesController < ApplicationController
 	load_and_authorize_resource :except => :create
 
 	def new
-	  @book = Book.find(params[:book_id]) 
+	  @book = Book.friendly.find(params[:book_id]) 
 	  @reference = Reference.new(:book_id => params[:book_id])
 
 	  # poulate the drop down. not scalable 
@@ -14,7 +14,7 @@ class ReferencesController < ApplicationController
 	def create
 	  
 	  
-	  @book = Book.find(params[:book_id]) 
+	  @book = Book.friendly.find(params[:book_id]) 
 	  
 	  @reference = Reference.new(reference_params)
  	  @reference.user_id = current_user.id
@@ -22,16 +22,18 @@ class ReferencesController < ApplicationController
 	  	
 	  authorize! :create, @reference 
 
-
-	  @reference.save
-
-	  redirect_to @book
+	  if @reference.save
+	  	redirect_to @book
+	  else
+	  	@books = Book.where(' id <> ' + @book.id.to_s ).order(' title ASC ')
+	  	render :new
+	  end
 
 	end
 
 
 	def destroy
-		@reference = Book.find(params[:id])
+		@reference = Book.friendly.find(params[:id])
 		@reference.destroy
 
 		redirect_to @reference.book

@@ -9,7 +9,7 @@ class AuthorsController < ApplicationController
 	end
 
 	def index
-		@author = Author.all().order('Name ASC')
+		@author = Author.all( :include => :books )
 	end
 
 	def show
@@ -30,8 +30,11 @@ class AuthorsController < ApplicationController
 	  authorize! :create, @author 
 
  
-	  @author.save
-	  redirect_to @author
+	  if @author.save
+	  	redirect_to @author
+	  else
+	  	render action: 'edit'
+	  end
 	end
 
 

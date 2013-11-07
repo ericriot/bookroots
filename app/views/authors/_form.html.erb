@@ -1,8 +1,7 @@
 <%= form_for(@author, :html => { :role => 'form'} ) do |f| %>
   <% if @author.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
-
+    <div class="alert">
+      
       <ul>
       <% @author.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

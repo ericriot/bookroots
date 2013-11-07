@@ -9,17 +9,20 @@ Bookroots::Application.routes.draw do
 
   # boks is a main resource but references will be nested under it.
   resources :books do
-    resources :references
+    resources :references, :favorites
   end
 
   resources :authors
 
-  root 'books#index'
   
+  get 'account'  => 'users#index'
+
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
+  root 'welcome#index'
+  # root 'books#index'
+  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

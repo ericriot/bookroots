@@ -24,7 +24,7 @@ gem "devise", "~> 3.1.0"
 gem "cancan"
 
 # friendly_id not working in rails 4, will wait.
-# gem 'friendly_id' 
+gem 'friendly_id', "5.0.0.rc2"
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -48,9 +48,13 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'thin' # heard more about this one, although recruitics used unicorn
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# this guy hides the css and javascript form the log which is insanely annoying
+gem 'quiet_assets', :group => :development

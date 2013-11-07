@@ -16,4 +16,60 @@
  @import "bootstrap-responsive";
 
   .clear { clear:both; }
+ 
+
+ul#book_grid { 
+  list-style-type: none; 
+  margin:0px; 
+  padding:0px; 
+}
+
+ul#book_grid li { 
+  display:inline-block;
+  width:48%; 
+  height:250px; 
+  vertical-align:top;
+  margin:0px 1% 10px 0%;
+  overflow:none;
+  text-align:center;
+  border:1px solid #d4d4d4;
+}
+
+/* make the list boxes go full screen on smaller device resolutions */
+@media screen and (max-width:480px) {
+  ul#book_grid li {
+    width:95%;
+  }
+}
+
+/* and go to 3 cells on larger */
+@media screen and (min-width:900px ) {
+  ul#book_grid li {
+    width:31.5%
+  }
+}
+
+@media screen and (min-width:1200px ) {
+  /* show 4 boxes */
+  ul#book_grid li {
+    width:23%
+  }
+}
+
+ul#book_grid li div {  
+  text-align:center; 
+  height:180px;   
+  margin-bottom:8px;
+}
+ul#book_grid li div span {
+  display: inline-block;
+  height: 100%;
+  width: 1px;
+}
+
+ul#book_grid li div img { 
+  max-width:95%;  
+  max-height:95%; 
+  vertical-align:bottom;
   
+}

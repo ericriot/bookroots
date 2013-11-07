@@ -2,8 +2,11 @@
   <%= f.hidden_field :amazon_url, class: 'input-large' %>
   
   <% if @book.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert">
+      <!--
+      # devise doesnt use this and I think just the errors is fine
       <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+    -->
 
       <ul>
       <% @book.errors.full_messages.each do |msg| %>

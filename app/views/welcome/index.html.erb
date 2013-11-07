@@ -1,0 +1,24 @@
+<%- title "Welcome to bookRoots" %>
+
+<h1><%= "Welcome to bookRoots" %></h1>
+
+<p>Have you recently finsihed a book and wanted to read another book that it mentioned? If so then bookRoots is the site for you. We show you what books inspired other books. This text is weak and needs Clare to re-write it.</p>
+
+<div class="row">
+  <div class="span4">
+    <h2>Search books:</h2>
+    <%= form_tag("books", method: "get", :class => 'form-inline') do %>
+    <div class="form-group">
+      <%= text_field_tag(:q) %>
+      <%= submit_tag("Search", :class => "btn btn-primary") %>
+    </div>
+    <% end %>
+  </div>
+  <div class="span8">
+    <%= link_to( image_tag( "home.jpg", :alt => "Welcome to bookRoots." ), books_path ) %>
+  </div>
+</div>
+
+
+
+

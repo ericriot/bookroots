@@ -1,11 +1,14 @@
 class Book < ActiveRecord::Base
 	
-	# this isnt working in rails 4 yet. darn.
-	# extend FriendlyId
-	# friendly_id :title, use: [ :slugged ]
-	# def should_generate_new_friendly_id?
-	# 	new_record?
-	# end
+	# this version 5 isn't released yet. joy.
+	extend FriendlyId
+	friendly_id :title, use: :slugged
+	
+	def should_generate_new_friendly_id?
+		# true
+		new_record?
+	end
+	
 
 	default_scope { order(' title ASC ') }	
 
@@ -18,11 +21,17 @@ class Book < ActiveRecord::Base
 	has_many :branches, :class_name => 'Reference', :foreign_key => 'book_id_secondary'
 	has_many :branched_books, :through => :branches
 
+	# This is the add to shelf / list functionality
+	has_many :favorites, :class_name => 'Favorite'
+	
+	# has_many :favorite_users, :through => :booklists
+
 
 	validates :title, presence: true, uniqueness: true
 	validates :author, presence: true
-	belongs_to :author
+	validates :published, numericality: :only_integer
 	
+	belongs_to :author
 	belongs_to :user # user that added book to database
 	
 
