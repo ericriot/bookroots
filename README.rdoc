@@ -2,7 +2,7 @@
 
 BookRoots serves several purposes:
 
-* Store references that books make to oher books, authors, artists, music etc.
+* Store references that books make to other books, authors, artists, music etc.
 
 * Help people find books to read.
 
