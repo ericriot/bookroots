@@ -7,10 +7,10 @@ BookRoots serves several purposes:
 * Help people find books to read.
 
 * Serve as Eric's dev playground to learn new technologies such as:
- * Ruby on Rails
- * MongoDb
- * AngularJS
- * CoffeeScript
+  * Ruby on Rails
+  * MongoDb
+  * AngularJS
+  * CoffeeScript
 
 This is not supposed to compete with GoodReads. It aims to compliment it. If I could turn this into a money making venture that'd be great, but that is not the goal.
 
