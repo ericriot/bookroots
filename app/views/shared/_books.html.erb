@@ -1,0 +1,38 @@
+
+
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Published</th>
+      <th>Roots</th>
+      <th>Branches</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @books.each do |book| %>
+    <% cache book do %>
+      <tr>
+        <td><%= book.id %></td>
+        <td><%= link_to book.title, book %></td>
+        <td><%= link_to book.author.name, book.author %></td>
+        <td><%= book.published %></td>
+        <td><%= book.references.size %></td>
+        <td><%= book.branches.size %></td>
+        
+        <td><% if can? :update, book %>
+          <%= link_to 'Edit', edit_book_path(book) %> &nbsp;
+          <% end %>
+          <% if can? :destroy, book %>
+          <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

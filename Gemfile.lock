@@ -32,9 +32,6 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
-    cache_digests (0.3.1)
-      actionpack (>= 3.2)
-      thread_safe
     cancan (1.6.10)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -139,7 +136,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
-  cache_digests
   cancan
   coffee-rails (~> 4.0.0)
   devise (~> 3.1.0)

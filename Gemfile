@@ -23,10 +23,11 @@ gem "devise", "~> 3.1.0"
 # cancan authorization
 gem "cancan"
 
-# friendly_id not working in rails 4, will wait.
+# friendly_id release candidate, not officially rails 4 ready
 gem 'friendly_id', "5.0.0.rc2"
 
-gem 'cache_digests'
+# this is built in to rails 4 now
+# gem 'cache_digests'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

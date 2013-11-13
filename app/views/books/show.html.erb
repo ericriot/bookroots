@@ -18,12 +18,17 @@
 		<% # does the user have the book in their list? # %>
 		
 		<p>
-			<% if current_user.likes_book?(@book.id) %>
-				One of your favorites. Nice choice. 
+			
+			<% if !current_user %>
+				Sign Up!
 			<% else %>
-				<%= link_to ( image_tag("icons/add.png") + " Add to Favorites" ) ,  book_favorites_path(:book_id => @book), :method => :post %>
+				<% if current_user.likes_book?(@book.id) %>
+					One of your favorites. Nice choice. 
+				<% else %>
+					<%= link_to ( image_tag("icons/add.png") + " Add to Favorites" ) ,  book_favorites_path(:book_id => @book), :method => :post %>
+				<% end %>
 			<% end %>
-		
+
 			<%= link_to raw("<i class='add'></i> Share"), "#", class: 'btn btn-primary' %>
 		</p>
 		
