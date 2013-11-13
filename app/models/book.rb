@@ -31,7 +31,7 @@ class Book < ActiveRecord::Base
 	validates :author, presence: true
 	validates :published, numericality: :only_integer
 	
-	belongs_to :author
+	belongs_to :author, touch: true
 	belongs_to :user # user that added book to database
 	
 

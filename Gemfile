@@ -26,6 +26,8 @@ gem "cancan"
 # friendly_id not working in rails 4, will wait.
 gem 'friendly_id', "5.0.0.rc2"
 
+gem 'cache_digests'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

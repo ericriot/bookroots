@@ -9,7 +9,7 @@ class AuthorsController < ApplicationController
 	end
 
 	def index
-		@author = Author.all( :include => :books )
+		@author = Author.all()  # :include => :books - this was in the parenthesis, but letting the caching handle the book counts
 	end
 
 	def show
